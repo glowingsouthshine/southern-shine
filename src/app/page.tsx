@@ -1,10 +1,21 @@
-export default function Page() {
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import Reviews from "@/components/Reviews";
+import SpecialOffer from "@/components/SpecialOffer";
+import Footer from "@/components/Footer";
+
+export default function Home() {
   return (
-    <main>
-      <div className="min-h-screen flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold">A Southern Glow</h1>
-        <p className="text-muted-foreground">Welcome!</p>
-      </div>
-    </main>
-  )
+    <div className="flex flex-col min-h-dvh bg-background">
+      <Header />
+      <main className="flex-1">
+        <Hero />
+        <Services />
+        <SpecialOffer />
+        <Reviews />
+      </main>
+      <Footer />
+    </div>
+  );
 }
