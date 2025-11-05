@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import RequestQuoteForm from "@/components/RequestQuoteForm";
 import SEO from "@/components/SEO";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <RequestQuoteForm />
         <SpecialOffer />
         <Reviews />
+        <FAQ />
       <ContactForm />
       </main>
       <Footer />

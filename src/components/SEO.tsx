@@ -31,3 +31,7 @@ export function LocalBusinessJsonLd() {
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
   );
 }
+
+export default function SEO() {
+  return <LocalBusinessJsonLd />;
+}

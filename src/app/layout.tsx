@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Analytics from '@/components/Analytics'
+import CallNow from '@/components/CallNow'
 
 export const metadata: Metadata = {
   title: 'A Southern Glow | House & Office Cleaning',
@@ -17,7 +19,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="font-body">{children}</body>
+      <body className="font-body">
+        {children}
+        <CallNow />
+        <Analytics />
+      </body>
     </html>
   )
 }

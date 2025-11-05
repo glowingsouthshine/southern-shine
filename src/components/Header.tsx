@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Header() {
   const navItems = [
@@ -32,6 +33,14 @@ export default function Header() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="#quote" onClick={() => trackEvent('click_get_quote', { location: 'header' })} className="inline-flex items-center rounded-md border px-3 py-2 hover:bg-accent">Get a Quote</Link>
+            </li>
+            <li>
+              <a href="tel:+18652654105" onClick={() => trackEvent('click_call', { location: 'header' })} className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-white hover:bg-primary/90">
+                Call (865) 265-4105
+              </a>
+            </li>
           </ul>
         </nav>
       </div>

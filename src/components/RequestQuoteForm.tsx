@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 const ADDONS = [
   { id: 'fridge', name: 'Inside Fridge', price: 30 },
@@ -28,7 +29,6 @@ export default function RequestQuoteForm() {
     const fd = new FormData(form);
     const payload: any = Object.fromEntries(fd.entries());
     payload.addons = addons;
-    // Date input to ISO
     if (payload.date) payload.date = new Date(payload.date as string).toISOString();
 
     try {
@@ -41,13 +41,17 @@ export default function RequestQuoteForm() {
       if (!res.ok) {
         setErrors(json.errors || { general: [json.error || 'Something went wrong'] });
         setOk(false);
+        trackEvent('form_error', { form_id: 'quote' });
       } else {
         setOk(true);
         form.reset();
         setAddons([]);
+        trackEvent('submit_form', { form_id: 'quote' });
+        trackEvent('generate_lead', { method: 'request_service' });
       }
     } catch (err) {
       setOk(false);
+      trackEvent('form_error', { form_id: 'quote' });
     } finally {
       setLoading(false);
     }

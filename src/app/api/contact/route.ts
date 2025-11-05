@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
 import { z } from 'zod';
+import { Resend } from 'resend';
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -10,7 +10,7 @@ const contactSchema = z.object({
 });
 
 function getTo(): string {
-  return process.env.NOTIFY_TO || process.env.NOTIFY_FALLBACK || process.env.GMAIL_USER || '';
+  return process.env.NOTIFY_TO || process.env.NOTIFY_FALLBACK || '';
 }
 
 export async function POST(req: Request) {
@@ -22,14 +22,7 @@ export async function POST(req: Request) {
     }
 
     const { name, email, phone, message } = parsed.data;
-
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
-    });
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const html = `
       <h2>New Contact Message — A Southern Glow</h2>
@@ -41,11 +34,15 @@ export async function POST(req: Request) {
     `;
 
     const fromLabel = process.env.NEXT_PUBLIC_BUSINESS_NAME || 'A Southern Glow';
-    await transporter.sendMail({
-      from: `"${fromLabel}" <${process.env.GMAIL_USER}>`,
-      to: getTo(),
-      replyTo: email,
-      subject: `Website Contact — ${name}`,
+    const to = getTo();
+    if (!to) {
+      return NextResponse.json({ ok: false, error: 'No NOTIFY_TO configured' }, { status: 500 });
+    }
+    await resend.emails.send({
+      from: `${fromLabel} <noreply@${process.env.RESEND_DOMAIN || 'resend.dev'}>`,
+      to: [to],
+      reply_to: email,
+      subject: `Website Contact - ${name}`,
       html,
     });
 
@@ -55,3 +52,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: 'Failed to send message' }, { status: 500 });
   }
 }
+

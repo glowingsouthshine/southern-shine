@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -26,19 +27,23 @@ export default function ContactForm() {
       if (!res.ok) {
         setErrors(json.errors || { general: [json.error || 'Something went wrong'] });
         setOk(false);
+        trackEvent('form_error', { form_id: 'contact' });
       } else {
         setOk(true);
         form.reset();
+        trackEvent('submit_form', { form_id: 'contact' });
+        trackEvent('contact', { method: 'contact_form' });
       }
     } catch (err) {
       setOk(false);
+      trackEvent('form_error', { form_id: 'contact' });
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4" aria-describedby="contact-status" aria-live="polite">
+    <form onSubmit={onSubmit} className="space-y-4" aria-describedby="contact-status" aria-live="polite" id="contact">
       <div>
         <label htmlFor="name" className="block text-sm font-medium">Name</label>
         <input id="name" name="name" required className="mt-1 w-full rounded-md border px-3 py-2" />
