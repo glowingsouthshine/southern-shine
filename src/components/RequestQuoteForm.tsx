@@ -116,14 +116,15 @@ export default function RequestQuoteForm() {
         <label htmlFor="notes" className="block text-sm font-medium">Notes</label>
         <textarea id="notes" name="notes" rows={4} className="mt-1 w-full rounded-md border px-3 py-2" />
       </div>
-      <button type="submit" className="inline-flex items-center rounded-md bg-black px-4 py-2 text-white disabled:opacity-50" disabled={loading}>
+      <button type="submit" className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-white hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50" disabled={loading}>
         {loading ? 'Submitting…' : 'Request Quote'}
       </button>
       <div id="quote-status" className="sr-only">
         {ok === true ? 'Request submitted' : ok === false ? 'Submission failed' : ''}
       </div>
-      {ok === true && <p className="text-green-700">Thanks! We’ll confirm shortly.</p>}
-      {ok === false && <p className="text-red-700">We couldn’t submit your request. Please try again.</p>}
+      {ok === true && <p className="text-green-700">Thanks! We'll confirm shortly.</p>}
+      {ok === false && <p className="text-red-700">We couldn't submit your request. Please try again.</p>}
     </form>
   );
 }
+

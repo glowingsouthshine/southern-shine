@@ -7,31 +7,41 @@ export default function Hero() {
   const heroImage = PlaceHolderImages.find((img) => img.id === "hero-image");
 
   return (
-    <section className="relative w-full h-[60dvh] min-h-[500px] flex items-center justify-center text-center">
-      {heroImage && (
-        <Image
-          src={heroImage.imageUrl}
-          alt={heroImage.description}
-          fill
-          className="object-cover"
-          data-ai-hint={heroImage.imageHint}
-          priority
-        />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-      <div className="absolute inset-0 bg-background/30" />
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl text-foreground font-bold leading-tight tracking-tight">
-            Experience the Glow of a Truly Clean Home
-          </h1>
-          <p className="mt-6 text-lg sm:text-xl text-foreground/90">
-            A Southern Glow offers premium cleaning services with a touch of Tennessee hospitality. Let our kind and respectful team make your home or vehicle shine.
-          </p>
-          <div className="mt-8">
-            <Button asChild size="lg">
-              <Link href="#services">Get a Free Estimate</Link>
-            </Button>
+    <section className="w-full bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div className="grid items-center gap-10 md:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold tracking-wide text-primary">Welcome to A Southern Glow</p>
+            <h1 className="mt-3 font-headline text-4xl sm:text-5xl font-extrabold leading-tight text-foreground">
+              Friendly, Professional Cleaning that Makes Life Easier
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-foreground/80">
+              Kind pros. Real smiles. Gloves and proper protection—without the hazmat vibe. We keep your home or vehicle fresh, sparkling, and worry‑free.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <Button asChild size="lg" className="shadow hover:shadow-md active:shadow-sm">
+                <Link href="#services">Get a Free Estimate</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="shadow hover:shadow-md active:shadow-sm">
+                <Link href="tel:+18652654105">Call (865) 265-4105</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="relative mx-auto w-full max-w-xl">
+            {heroImage && (
+              <div className="relative overflow-hidden rounded-xl border bg-card shadow-xl">
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={heroImage.imageUrl}
+                    alt={heroImage.description}
+                    fill
+                    className="object-cover"
+                    data-ai-hint={heroImage.imageHint}
+                    priority
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

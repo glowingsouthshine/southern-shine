@@ -63,14 +63,15 @@ export default function ContactForm() {
         <textarea id="message" name="message" rows={5} required className="mt-1 w-full rounded-md border px-3 py-2" />
         {errors.message && <p className="text-sm text-red-600">{errors.message.join(', ')}</p>}
       </div>
-      <button type="submit" className="inline-flex items-center rounded-md bg-black px-4 py-2 text-white disabled:opacity-50" disabled={loading}>
+      <button type="submit" className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-white hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50" disabled={loading}>
         {loading ? 'Sending…' : 'Send'}
       </button>
       <div id="contact-status" className="sr-only">
         {ok === true ? 'Message sent successfully' : ok === false ? 'Message failed' : ''}
       </div>
-      {ok === true && <p className="text-green-700">Thanks! We’ll be in touch shortly.</p>}
-      {ok === false && <p className="text-red-700">We couldn’t send your message. Please try again.</p>}
+      {ok === true && <p className="text-green-700">Thanks! We'll be in touch shortly.</p>}
+      {ok === false && <p className="text-red-700">We couldn't send your message. Please try again.</p>}
     </form>
   );
 }
+

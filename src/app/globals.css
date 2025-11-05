@@ -13,34 +13,44 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 25 95% 53%;
+    /* Saturated sea‑green primary for standout buttons */
+    --primary: 160 65% 38%;
     --primary-foreground: 60 9.1% 97.8%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Muted sea‑green for gentle surfaces */
+    --secondary: 160 25% 95%;
+    --secondary-foreground: 160 25% 25%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted lavender accents for soft highlights */
+    --muted: 270 20% 96%;
+    --muted-foreground: 270 15% 35%;
 
-    --accent: 45 100% 96%;
-    --accent-foreground: 25 95% 35%;
+    --accent: 270 30% 96%;
+    --accent-foreground: 270 30% 30%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 25 95% 53%;
+    /* Slightly stronger default border; saturated borders can opt into primary */
+    --border: 210 20% 86%;
+    --input: 210 20% 86%;
+    --ring: 160 65% 38%;
 
-    --chart-1: 25 95% 53%;
-    --chart-2: 210 80% 40%;
-    --chart-3: 160 80% 40%;
-    --chart-4: 280 80% 40%;
-    --chart-5: 340 80% 40%;
+    --chart-1: 160 65% 38%;
+    --chart-2: 210 60% 45%;
+    --chart-3: 270 45% 45%;
+    --chart-4: 25 80% 52%;
+    --chart-5: 340 70% 45%;
 
     --radius: 0.5rem;
   }
 
   * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
+  body {
+    @apply bg-background text-foreground;
+    background:
+      radial-gradient(1200px 600px at -10% -10%, hsl(var(--accent) / 0.25), transparent 40%),
+      radial-gradient(1000px 500px at 110% 0%, hsl(var(--primary) / 0.12), transparent 35%),
+      hsl(var(--background));
+  }
 }
