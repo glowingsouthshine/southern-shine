@@ -13,6 +13,8 @@ const requestSchema = z.object({
   address: z.string().min(5),
   date: z.string().optional().default(''),
   notes: z.string().optional().default(''),
+  frequency: z.string().optional().default(''),
+  bundle: z.string().optional().default(''),
 });
 
 function getTo(): string {
@@ -39,6 +41,8 @@ export async function POST(req: Request) {
         <li><strong>Address:</strong> ${data.address}</li>
         ${data.date ? `<li><strong>Preferred Date:</strong> ${new Date(data.date).toLocaleString()}</li>` : ''}
         <li><strong>Service:</strong> ${data.serviceType}</li>
+        ${data.frequency ? `<li><strong>Frequency:</strong> ${data.frequency}</li>` : ''}
+        ${data.bundle ? `<li><strong>Package:</strong> ${data.bundle}</li>` : ''}
         <li><strong>SqFt:</strong> ${data.sqft || '-'}</li>
         <li><strong>Add-ons:</strong> ${data.addons?.join(', ') || '-'}</li>
         <li><strong>Est. Total:</strong> ${data.total ?? '-'}</li>

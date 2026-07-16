@@ -6,10 +6,11 @@ import { trackEvent } from "@/lib/analytics";
 
 export default function Header() {
   const navItems = [
-    { name: "Services", href: "#services" },
-    { name: "Specials", href: "#specials" },
-    { name: "Reviews", href: "#reviews" },
-    { name: "Contact", href: "#contact" },
+    { name: "Services", href: "/#services" },
+    { name: "Specials", href: "/#specials" },
+    { name: "About", href: "/#about" },
+    { name: "Reviews", href: "/#reviews" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -34,10 +35,10 @@ export default function Header() {
               </li>
             ))}
             <li>
-              <Link href="#quote" onClick={() => trackEvent('click_get_quote', { location: 'header' })} className="inline-flex items-center rounded-md border px-3 py-2 hover:bg-accent">Get a Quote</Link>
+              <Link href="/#quote" onClick={() => trackEvent('click_get_quote', { location: 'header' })} className="inline-flex items-center rounded-md border border-primary/35 bg-card/70 px-3 py-2 shadow-btn transition-all duration-150 hover:-translate-y-px hover:bg-accent/60 hover:shadow-btn-lg active:translate-y-[2px] active:shadow-btn-sm">Get a Quote</Link>
             </li>
             <li>
-              <a href="tel:+18652654105" onClick={() => trackEvent('click_call', { location: 'header' })} className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-white hover:bg-primary/90">
+              <a href="tel:+18652654105" onClick={() => trackEvent('click_call', { location: 'header' })} className="inline-flex items-center rounded-md bg-gradient-to-b from-primary to-[hsl(10_75%_45%)] px-3 py-2 text-white shadow-btn transition-all duration-150 hover:-translate-y-px hover:shadow-btn-lg hover:brightness-105 active:translate-y-[2px] active:shadow-btn-sm active:brightness-95">
                 Call (865) 265-4105
               </a>
             </li>

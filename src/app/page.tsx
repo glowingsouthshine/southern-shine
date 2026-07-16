@@ -8,6 +8,8 @@ import ContactForm from "@/components/ContactForm";
 import RequestQuoteForm from "@/components/RequestQuoteForm";
 import SEO from "@/components/SEO";
 import FAQ from "@/components/FAQ";
+import Promises from "@/components/Promises";
+import About from "@/components/About";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
@@ -31,6 +33,8 @@ export default function Home() {
           </div>
         </section>
         <SpecialOffer />
+        <Promises />
+        <About />
         <Reviews />
         <FAQ />
         <section id="contact" className="py-16 sm:py-24 bg-accent/20">

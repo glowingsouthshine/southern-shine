@@ -78,6 +78,14 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      /* Warm-tinted shadows — black shadows look dirty on cream backgrounds */
+      boxShadow: {
+        btn: '0 1px 2px hsl(20 50% 25% / 0.15), 0 3px 8px -1px hsl(20 60% 35% / 0.25)',
+        'btn-lg': '0 2px 4px hsl(20 50% 25% / 0.15), 0 8px 18px -2px hsl(20 60% 35% / 0.32)',
+        'btn-sm': '0 1px 2px hsl(20 50% 25% / 0.28)',
+        warm: '0 1px 3px hsl(24 45% 30% / 0.08), 0 6px 24px -4px hsl(24 50% 35% / 0.14)',
+        'warm-lg': '0 2px 6px hsl(24 45% 30% / 0.10), 0 16px 44px -8px hsl(24 50% 35% / 0.22)',
+      },
       keyframes: {
         'accordion-down': {
           from: {

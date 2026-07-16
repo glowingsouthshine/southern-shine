@@ -4,53 +4,79 @@
 
 @layer base {
   :root {
-    --background: 40 60% 98%;
-    --foreground: 222.2 84% 4.9%;
+    /* Warm cream base — golden-hour light, a shade deeper than white */
+    --background: 36 42% 90%;
+    --foreground: 24 32% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 38 55% 96%;
+    --card-foreground: 24 32% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 38 55% 96%;
+    --popover-foreground: 24 32% 15%;
 
-    /* Saturated sea‑green primary for standout buttons */
-    --primary: 22 80% 56%;
-    --primary-foreground: 60 9.1% 97.8%;
+    /* Sunset ember — saturated terracotta for CTAs */
+    --primary: 16 82% 51%;
+    --primary-foreground: 40 100% 98%;
 
-    /* Muted sea‑green for gentle surfaces */
-    --secondary: 22 35% 94%;
-    --secondary-foreground: 22 35% 28%;
+    /* Warm sand for gentle surfaces */
+    --secondary: 32 44% 84%;
+    --secondary-foreground: 22 45% 22%;
 
-    /* Muted lavender accents for soft highlights */
-    --muted: 35 25% 95%;
-    --muted-foreground: 35 22% 35%;
+    --muted: 33 32% 85%;
+    --muted-foreground: 25 20% 34%;
 
-    --accent: 18 45% 96%;
-    --accent-foreground: 18 40% 30%;
+    /* Dusty rose — the pink edge of a sunset */
+    --accent: 348 40% 87%;
+    --accent-foreground: 348 38% 26%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    /* Slightly stronger default border; saturated borders can opt into primary */
-    --border: 22 25% 85%;
-    --input: 22 25% 85%;
-    --ring: 22 80% 56%;
+    --border: 28 30% 74%;
+    --input: 28 30% 74%;
+    --ring: 16 82% 51%;
 
-    --chart-1: 22 80% 56%;
-    --chart-2: 10 70% 50%;
-    --chart-3: 35 55% 45%;
-    --chart-4: 45 70% 52%;
-    --chart-5: 5 70% 45%;
+    /* Sunset & landscape tones for gradients and illustration */
+    --sunset-gold: 42 92% 58%;
+    --sunset-coral: 8 78% 60%;
+    --sunset-rose: 348 60% 72%;
+    --dusk: 266 28% 34%;
+    --hill-near: 95 22% 42%;
+    --hill-far: 140 18% 52%;
 
-    --radius: 0.5rem;
+    --chart-1: 16 82% 51%;
+    --chart-2: 42 92% 45%;
+    --chart-3: 95 22% 42%;
+    --chart-4: 348 60% 60%;
+    --chart-5: 266 28% 44%;
+
+    --radius: 0.65rem;
   }
 
   * { @apply border-border; }
   body {
     @apply bg-background text-foreground;
+    /* Golden-hour sky: gold rising at the horizon corners, rose overhead */
     background:
-      radial-gradient(1200px 600px at -10% -10%, hsl(var(--accent) / 0.25), transparent 40%),
-      radial-gradient(1000px 500px at 110% 0%, hsl(var(--primary) / 0.12), transparent 35%),
+      radial-gradient(1400px 700px at 15% -10%, hsl(var(--sunset-gold) / 0.20), transparent 45%),
+      radial-gradient(1200px 600px at 100% 0%, hsl(var(--sunset-rose) / 0.18), transparent 42%),
+      radial-gradient(1600px 800px at 50% 115%, hsl(var(--hill-far) / 0.10), transparent 50%),
       hsl(var(--background));
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  /* Soft warm glow behind featured cards */
+  .glow-card {
+    box-shadow:
+      0 1px 3px hsl(24 45% 30% / 0.10),
+      0 8px 30px -6px hsl(24 50% 35% / 0.18);
+  }
+  .text-sunset-gradient {
+    background: linear-gradient(100deg, hsl(var(--sunset-coral)), hsl(var(--primary)) 45%, hsl(var(--sunset-gold)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }

@@ -5,9 +5,12 @@ import React from "react";
 
 const FAQS = [
   { q: "How much does a standard clean cost?", a: "Most homes start around $120 and vary with size and add-ons. Use the estimate tool for a quick quote." },
+  { q: "Do you offer discounts for regular cleanings?", a: "We sure do — weekly visits save 15%, every-2-weeks saves 10%, and monthly saves 5%. Regulars get the family rate." },
+  { q: "Will you really water my plants and give my pets a treat?", a: "Happily, and it's free — just tell us it's okay first. We'll follow any instructions you leave, and we always check about treats since some critters have special diets." },
+  { q: "How do I pay?", a: "After the clean, whenever you're happy — card at the door, cash, check, or a secure text-to-pay link. Never a dime upfront." },
   { q: "Do I need to be home?", a: "No. Many clients provide access instructions. We can text before and after each visit." },
-  { q: "What areas do you serve?", a: "Oak Ridge, Knoxville, Sevierville and nearby Tennessee communities." },
-  { q: "Are you insured?", a: "Yes, fully insured. We treat every home with care and respect." },
+  { q: "What areas do you serve?", a: "Oak Ridge, Knoxville, Sevierville and nearby East Tennessee communities. Travel is free within about 20 miles of Oak Ridge; a small trip fee may apply beyond that." },
+  { q: "How do you treat my home?", a: "With care and respect, every visit. If something isn't right, tell me and I'll make it right." },
 ];
 
 export default function FAQ() {

@@ -2,12 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
 
-import { services, addons, carDetailingAddons, carDetailingBundles } from "@/lib/data";
+import { services, addons, carDetailingBundles, frequencies } from "@/lib/data";
 import { submitServiceRequest } from "@/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -36,9 +36,11 @@ export default function Services() {
   const [serviceType, setServiceType] = useState(services[0].name);
   const [sqft, setSqft] = useState(1500);
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
+  const [frequency, setFrequency] = useState("one-time");
+  const [bundle, setBundle] = useState("none");
 
   const { toast } = useToast();
-  const [state, formAction] = useFormState(submitServiceRequest, null);
+  const [state, formAction] = useActionState(submitServiceRequest, null);
 
   const { control, handleSubmit, formState: { errors }, reset, watch } = useForm<{ name: string; email: string; phone: string; address: string; date?: Date | undefined; }>({
     resolver: zodResolver(requestSchema),
@@ -47,17 +49,19 @@ export default function Services() {
 
   const selectedService = useMemo(() => services.find((s) => s.name === serviceType)!, [serviceType]);
 
+  const isClean = serviceType.includes("Clean");
+  const selectedFrequency = frequencies.find((f) => f.id === frequency) || frequencies[0];
+
   const price = useMemo(() => {
     if (!selectedService || selectedService.basePrice === null) return null;
     const basePrice = selectedService.basePrice;
-    const sqftCharge = serviceType.includes("Clean") ? Math.max(0, sqft - 1000) * (selectedService.pricePerSqFt || 0) : 0;
-    const currentAddons = serviceType === "Car Detailing" ? carDetailingAddons : addons;
-    const addonsPrice = selectedAddons.reduce((total, addonId) => {
-      const addon = currentAddons.find((a) => a.id === addonId);
-      return total + (addon?.price || 0);
-    }, 0);
-    return Math.round(basePrice + sqftCharge + addonsPrice);
-  }, [selectedService, sqft, selectedAddons, serviceType]);
+    const sqftCharge = isClean ? Math.max(0, sqft - 1000) * (selectedService.pricePerSqFt || 0) : 0;
+    const extrasPrice = serviceType === "Car Detailing"
+      ? (carDetailingBundles.find((b) => b.id === bundle)?.price || 0)
+      : selectedAddons.reduce((total, addonId) => total + (addons.find((a) => a.id === addonId)?.price || 0), 0);
+    const discount = isClean ? selectedFrequency.discount : 0;
+    return Math.round((basePrice + sqftCharge + extrasPrice) * (1 - discount));
+  }, [selectedService, sqft, selectedAddons, serviceType, bundle, isClean, selectedFrequency]);
 
   useEffect(() => {
     if (state?.type === "success") {
@@ -66,6 +70,8 @@ export default function Services() {
       setServiceType(services[0].name);
       setSqft(1500);
       setSelectedAddons([]);
+      setFrequency("one-time");
+      setBundle("none");
       trackEvent('submit_form', { form_id: 'services-estimator' });
       trackEvent('generate_lead', { method: 'services_estimator' });
     } else if (state?.type === "error") {
@@ -74,7 +80,6 @@ export default function Services() {
     }
   }, [state, toast, reset]);
 
-  const currentAddons = serviceType === "Car Detailing" ? carDetailingAddons : addons;
 
   return (
     <section id="services" className="py-16 sm:py-24 bg-background">
@@ -107,7 +112,7 @@ export default function Services() {
                 </RadioGroup>
               </div>
 
-              {serviceType.includes("Clean") && selectedService.pricePerSqFt !== null && (
+              {isClean && selectedService.pricePerSqFt !== null && (
                 <div className="space-y-4">
                   <Label htmlFor="sqft" className="text-lg font-semibold">Step 2: Home Size</Label>
                   <div className="flex items-center gap-4">
@@ -117,18 +122,56 @@ export default function Services() {
                 </div>
               )}
 
-              <div className="space-y-4">
-                <Label className="text-lg font-semibold">Step {serviceType.includes("Clean") ? 3 : 2}: Add-ons</Label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {currentAddons.map((a) => (
-                    <label key={a.id} className="flex items-center gap-3 rounded-md border p-3">
-                      <Checkbox checked={selectedAddons.includes(a.id)} onCheckedChange={() => setSelectedAddons((prev) => prev.includes(a.id) ? prev.filter(id => id !== a.id) : [...prev, a.id])} />
-                      <span className="flex-1">{a.name}</span>
-                      <span className="text-sm text-muted-foreground">${a.price}</span>
-                    </label>
-                  ))}
+              {isClean && (
+                <div className="space-y-4">
+                  <Label className="text-lg font-semibold">Step 3: How Often?</Label>
+                  <p className="text-sm text-muted-foreground">Regulars get the family rate — the more we visit, the more you save.</p>
+                  <RadioGroup value={frequency} onValueChange={setFrequency} className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    {frequencies.map((f) => (
+                      <Label key={f.id} htmlFor={`freq-${f.id}`} className="block cursor-pointer rounded-lg border bg-card p-3 text-center has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all">
+                        <RadioGroupItem value={f.id} id={`freq-${f.id}`} className="sr-only" />
+                        <span className="font-semibold">{f.name}</span>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {f.discount > 0 ? `Save ${Math.round(f.discount * 100)}%` : "Standard rate"}
+                        </p>
+                      </Label>
+                    ))}
+                  </RadioGroup>
                 </div>
-              </div>
+              )}
+
+              {serviceType === "Car Detailing" ? (
+                <div className="space-y-4">
+                  <Label className="text-lg font-semibold">Step 2: Pick Your Package</Label>
+                  <RadioGroup value={bundle} onValueChange={setBundle} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {[{ id: "none", name: "Just the Detail", services: ["Interior detailing only"], price: 0 }, ...carDetailingBundles].map((b) => (
+                      <Label key={b.id} htmlFor={`bundle-${b.id}`} className="block cursor-pointer rounded-lg border bg-card p-4 has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all">
+                        <RadioGroupItem value={b.id} id={`bundle-${b.id}`} className="sr-only" />
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold">{b.name}</span>
+                          <span className="text-sm font-semibold text-primary">{b.price > 0 ? `+$${b.price}` : "—"}</span>
+                        </div>
+                        <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+                          {b.services.map((s) => <li key={s}>• {s}</li>)}
+                        </ul>
+                      </Label>
+                    ))}
+                  </RadioGroup>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <Label className="text-lg font-semibold">Step 4: Add-ons</Label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {addons.map((a) => (
+                      <label key={a.id} className="flex items-center gap-3 rounded-md border p-3">
+                        <Checkbox checked={selectedAddons.includes(a.id)} onCheckedChange={() => setSelectedAddons((prev) => prev.includes(a.id) ? prev.filter(id => id !== a.id) : [...prev, a.id])} />
+                        <span className="flex-1">{a.name}</span>
+                        <span className={a.price === 0 ? "text-sm font-medium text-primary" : "text-sm text-muted-foreground"}>{a.price === 0 ? "Free — just say the word" : `$${a.price}`}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
@@ -169,9 +212,11 @@ export default function Services() {
                 <Alert className="bg-accent/40">
                   <AlertTitle>Estimated Total</AlertTitle>
                   <AlertDescription>
-                    {serviceType} — {serviceType.includes("Clean") ? `${sqft} sqft` : "Flat rate"}
-                    {selectedAddons.length > 0 ? ` + ${selectedAddons.length} add-on(s)` : ""}
-                    <span className="ml-2 font-semibold">${price}</span>
+                    {serviceType} — {isClean ? `${sqft} sqft` : bundle !== "none" ? carDetailingBundles.find((b) => b.id === bundle)?.name + " package" : "Flat rate"}
+                    {isClean && selectedAddons.length > 0 ? ` + ${selectedAddons.filter(id => (addons.find(a => a.id === id)?.price || 0) > 0).length || "free"} add-on(s)` : ""}
+                    {isClean && selectedFrequency.discount > 0 ? `, ${selectedFrequency.name.toLowerCase()} (save ${Math.round(selectedFrequency.discount * 100)}%)` : ""}
+                    <span className="ml-2 font-semibold">${price}{isClean && selectedFrequency.discount > 0 ? "/visit" : ""}</span>
+                    <p className="mt-1 text-xs text-muted-foreground">Free travel within about 20 miles of Oak Ridge — a small trip fee may apply beyond.</p>
                   </AlertDescription>
                 </Alert>
               )}
@@ -180,6 +225,8 @@ export default function Services() {
               <input type="hidden" name="serviceType" value={serviceType} />
               <input type="hidden" name="sqft" value={sqft} />
               <input type="hidden" name="addons" value={JSON.stringify(selectedAddons)} />
+              <input type="hidden" name="frequency" value={isClean ? selectedFrequency.name : ""} />
+              <input type="hidden" name="bundle" value={serviceType === "Car Detailing" && bundle !== "none" ? (carDetailingBundles.find((b) => b.id === bundle)?.name || "") : ""} />
               {price !== null && <input type="hidden" name="total" value={price} />}
               {/* Make sure date is included in form submission */}
               <input type="hidden" name="date" value={watch("date") ? new Date(watch("date") as Date).toISOString() : ""} />

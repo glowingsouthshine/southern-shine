@@ -2,13 +2,7 @@
 
 import React, { useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
-
-const ADDONS = [
-  { id: 'fridge', name: 'Inside Fridge', price: 30 },
-  { id: 'oven', name: 'Inside Oven', price: 30 },
-  { id: 'windows', name: 'Interior Windows', price: 50 },
-  { id: 'laundry', name: 'Laundry (per load)', price: 25 },
-];
+import { addons as ADDONS, frequencies } from '@/lib/data';
 
 export default function RequestQuoteForm() {
   const [loading, setLoading] = useState(false);
@@ -58,7 +52,7 @@ export default function RequestQuoteForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4" id="quote" aria-describedby="quote-status" aria-live="polite">
+    <form onSubmit={onSubmit} className="space-y-4" aria-describedby="quote-status" aria-live="polite">
       <div>
         <label htmlFor="serviceType" className="block text-sm font-medium">Service</label>
         <select id="serviceType" name="serviceType" required className="mt-1 w-full rounded-md border px-3 py-2">
@@ -75,13 +69,21 @@ export default function RequestQuoteForm() {
         <label htmlFor="sqft" className="block text-sm font-medium">Approx. Sq Ft</label>
         <input id="sqft" name="sqft" className="mt-1 w-full rounded-md border px-3 py-2" />
       </div>
+      <div>
+        <label htmlFor="frequency" className="block text-sm font-medium">How Often?</label>
+        <select id="frequency" name="frequency" className="mt-1 w-full rounded-md border px-3 py-2">
+          {frequencies.map(f => (
+            <option key={f.id} value={f.name}>{f.name}{f.discount > 0 ? ` — save ${Math.round(f.discount * 100)}%` : ''}</option>
+          ))}
+        </select>
+      </div>
       <fieldset>
         <legend className="text-sm font-medium">Add-ons</legend>
         <div className="mt-2 grid grid-cols-2 gap-2">
           {ADDONS.map(a => (
             <label key={a.id} className="flex items-center gap-2">
               <input type="checkbox" checked={addons.includes(a.id)} onChange={() => toggleAddon(a.id)} />
-              <span>{a.name} (${a.price})</span>
+              <span>{a.name} ({a.price === 0 ? 'Free' : `$${a.price}`})</span>
             </label>
           ))}
         </div>

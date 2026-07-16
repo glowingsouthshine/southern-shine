@@ -22,6 +22,10 @@ export async function submitServiceRequest(_: any, formData: FormData): Promise<
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
+      if (data.errors) {
+        const fields = Object.keys(data.errors).join(", ");
+        return { type: "error", message: `Please double-check these fields: ${fields}.` };
+      }
       return { type: "error", message: data.error || "Failed to submit request" };
     }
     return { type: "success", message: "We received your request. We’ll confirm shortly." };
@@ -39,7 +43,7 @@ export async function submitReview(_: any, formData: FormData): Promise<ActionRe
       body: JSON.stringify({
         name: payload.name,
         review: payload.review,
-        rating: 5,
+        rating: Math.min(5, Math.max(1, Number(payload.rating) || 5)),
       }),
     });
     if (!res.ok) {

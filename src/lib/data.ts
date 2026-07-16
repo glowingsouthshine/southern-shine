@@ -42,8 +42,17 @@ export const services: Service[] = [
 export const addons = [
   { id: "fridge", name: "Inside Fridge", price: 30 },
   { id: "oven", name: "Inside Oven", price: 30 },
-  { id: "windows", name: "Interior Windows", price: 50 },
-  { id: "laundry", name: "Laundry (per load)", price: 25 },
+  { id: "windows", name: "Interior Windows (first 10, then $4/ea)", price: 50 },
+  { id: "laundry", name: "Laundry (up to 2 loads, started during clean)", price: 25 },
+  { id: "plants", name: "Water the Plants", price: 0 },
+  { id: "critters", name: "Treats for the Critters (with your okay)", price: 0 },
+];
+
+export const frequencies = [
+  { id: "one-time", name: "One-Time", discount: 0 },
+  { id: "monthly", name: "Monthly", discount: 0.05 },
+  { id: "biweekly", name: "Every 2 Weeks", discount: 0.1 },
+  { id: "weekly", name: "Weekly", discount: 0.15 },
 ];
 
 export const carDetailingAddons = [
@@ -58,9 +67,7 @@ export const carDetailingBundles = [
   { id: "premium", name: "Premium", services: ["Full Vacuum & Wipe-down", "Carpet/Upholstery Shampoo", "Leather Clean & Condition"], price: 110 },
 ];
 
-export const reviews = [
-  { name: "Emily R.", rating: 5, review: "They made my home sparkle! Friendly and professional." },
-  { name: "John D.", rating: 5, review: "Reliable service and great communication. Highly recommend." },
-  { name: "Sofia K.", rating: 4, review: "Deep clean was fantastic. Will book again." },
-];
+// Real customer reviews only. Add entries here as they come in — or wire this
+// to the Google Business Profile feed once it's live.
+export const reviews: { name: string; rating: number; review: string }[] = [];
 

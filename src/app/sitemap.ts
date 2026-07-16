@@ -16,5 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ['oak-ridge','knoxville','sevierville','farragut','maryville','alcoa','powell','lenoir-city','clinton'].forEach(a => push(`/areas/${a}`));
   // Quote page
   push('/quote');
+  // Pay page
+  push('/pay', 0.5);
   return urls;
 }
