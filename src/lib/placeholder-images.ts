@@ -7,10 +7,11 @@ export type PlaceholderImage = {
 
 export const PlaceHolderImages: PlaceholderImage[] = [
   {
+    // Hero image is managed by the owner for Google indexing — do not change without asking.
     id: "hero-image",
-    imageUrl: "/images/hero-team.png",
-    description: "Two friendly A Southern Glow cleaners sharing a laugh in a warm East Tennessee kitchen",
-    imageHint: "friendly cleaners smiling, warm wood kitchen, bright and inviting",
+    imageUrl: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1600&auto=format&fit=crop",
+    description: "Smiling cleaner wearing gloves and light protective gear",
+    imageHint: "friendly cleaner smiling, gloves, light protective gear, bright and inviting, not hazmat",
   },
   {
     id: "about-image",
