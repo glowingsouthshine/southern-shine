@@ -10,6 +10,7 @@ import SEO from "@/components/SEO";
 import FAQ from "@/components/FAQ";
 import Promises from "@/components/Promises";
 import About from "@/components/About";
+import Gallery from "@/components/Gallery";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
@@ -34,6 +35,7 @@ export default function Home() {
         </section>
         <SpecialOffer />
         <Promises />
+        <Gallery />
         <About />
         <Reviews />
         <FAQ />

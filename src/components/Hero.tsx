@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { UserCheck, HeartHandshake, MapPin } from "lucide-react";
 
 const trustBadges = [
@@ -33,8 +32,6 @@ function RollingHills() {
 }
 
 export default function Hero() {
-  const heroImage = PlaceHolderImages.find((img) => img.id === "hero-image");
-
   return (
     <section className="relative w-full overflow-hidden">
       {/* Sunset sky wash behind everything */}
@@ -47,14 +44,14 @@ export default function Hero() {
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sunset-gradient">
-              Swish. Sparkle. Shine.
+              Locally owned · Oak Ridge, TN
             </p>
             <h1 className="mt-3 font-headline text-4xl sm:text-5xl font-extrabold leading-tight text-foreground">
-              Friendly, Professional Cleaning that Makes Life Easier
+              Honest work, and a home you&rsquo;ll love coming back to.
             </h1>
             <p className="mt-6 text-base sm:text-lg text-foreground/80">
-              Kind pros. Real smiles. Gloves and proper protection—without the hazmat vibe. We keep
-              your home or vehicle fresh, sparkling, and worry‑free.
+              Careful, reliable cleaning for homes and offices around East Tennessee &mdash; fair
+              prices, and no payment until you&rsquo;re happy.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg">
@@ -65,21 +62,20 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-xl">
-            {heroImage && (
-              <div className="relative overflow-hidden rounded-xl border border-primary/20 bg-card shadow-warm-lg">
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={heroImage.imageUrl}
-                    alt={heroImage.description}
-                    fill
-                    className="object-cover"
-                    data-ai-hint={heroImage.imageHint}
-                    priority
-                  />
-                </div>
-              </div>
-            )}
+          <div className="relative mx-auto flex w-full max-w-xl items-center justify-center">
+            {/* The logo casts a warm bloom that spills across this side of the page */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -inset-x-[45%] -inset-y-[35%] -z-10 bg-[radial-gradient(closest-side,hsl(var(--sunset-gold)/0.32),hsl(var(--sunset-coral)/0.15)_45%,transparent_72%)] blur-2xl"
+            />
+            <Image
+              src="/images/logo.png"
+              alt="A Southern Glow — a house glowing warmly against the dusk"
+              width={720}
+              height={720}
+              priority
+              className="relative w-full max-w-md drop-shadow-[0_0_70px_hsl(var(--sunset-gold)/0.35)]"
+            />
           </div>
         </div>
 

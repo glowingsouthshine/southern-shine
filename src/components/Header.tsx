@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 import { trackEvent } from "@/lib/analytics";
 
 export default function Header() {
@@ -16,8 +16,15 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2">
-          <Sparkles className="h-6 w-6 text-primary" />
+        <Link href="/" className="logo-glow flex items-center gap-2">
+          <Image
+            src="/images/logo.png"
+            alt="A Southern Glow"
+            width={44}
+            height={44}
+            priority
+            className="h-10 w-10 object-contain"
+          />
           <span className="font-headline text-2xl font-bold text-foreground">
             A Southern Glow
           </span>
@@ -35,10 +42,10 @@ export default function Header() {
               </li>
             ))}
             <li>
-              <Link href="/#quote" onClick={() => trackEvent('click_get_quote', { location: 'header' })} className="inline-flex items-center rounded-md border border-primary/35 bg-card/70 px-3 py-2 shadow-btn transition-all duration-150 hover:-translate-y-px hover:bg-accent/60 hover:shadow-btn-lg active:translate-y-[2px] active:shadow-btn-sm">Get a Quote</Link>
+              <Link href="/#quote" onClick={() => trackEvent('click_get_quote', { location: 'header' })} className="btn-velvet inline-flex items-center rounded-xl border border-primary/35 bg-card/70 px-3 py-2 transition-all duration-150 hover:bg-accent/60">Get a Quote</Link>
             </li>
             <li>
-              <a href="tel:+18652654105" onClick={() => trackEvent('click_call', { location: 'header' })} className="inline-flex items-center rounded-md bg-gradient-to-b from-primary to-[hsl(10_75%_45%)] px-3 py-2 text-white shadow-btn transition-all duration-150 hover:-translate-y-px hover:shadow-btn-lg hover:brightness-105 active:translate-y-[2px] active:shadow-btn-sm active:brightness-95">
+              <a href="tel:+18652654105" onClick={() => trackEvent('click_call', { location: 'header' })} className="btn-velvet inline-flex items-center rounded-xl bg-gradient-to-b from-primary to-[hsl(10_75%_45%)] px-3 py-2 text-white transition-all duration-150">
                 Call (865) 265-4105
               </a>
             </li>

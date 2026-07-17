@@ -4,37 +4,37 @@
 
 @layer base {
   :root {
-    /* Warm cream base — golden-hour light, a shade deeper than white */
-    --background: 36 42% 90%;
-    --foreground: 24 32% 15%;
+    /* Dusk base — deep warm plum-charcoal, the sky just after sundown */
+    --background: 24 24% 8%;
+    --foreground: 36 38% 91%;
 
-    --card: 38 55% 96%;
-    --card-foreground: 24 32% 15%;
+    --card: 24 20% 12%;
+    --card-foreground: 36 38% 91%;
 
-    --popover: 38 55% 96%;
-    --popover-foreground: 24 32% 15%;
+    --popover: 24 20% 12%;
+    --popover-foreground: 36 38% 91%;
 
-    /* Sunset ember — saturated terracotta for CTAs */
-    --primary: 16 82% 51%;
-    --primary-foreground: 40 100% 98%;
+    /* Sunset ember — saturated terracotta for CTAs, brightened for dark */
+    --primary: 16 85% 55%;
+    --primary-foreground: 40 100% 97%;
 
-    /* Warm sand for gentle surfaces */
-    --secondary: 32 44% 84%;
-    --secondary-foreground: 22 45% 22%;
+    /* Warm dark surface for gentle sections */
+    --secondary: 24 16% 16%;
+    --secondary-foreground: 36 30% 86%;
 
-    --muted: 33 32% 85%;
-    --muted-foreground: 25 20% 34%;
+    --muted: 24 14% 17%;
+    --muted-foreground: 33 22% 68%;
 
-    /* Dusty rose — the pink edge of a sunset */
-    --accent: 348 40% 87%;
-    --accent-foreground: 348 38% 26%;
+    /* Dusty rose — the pink edge of a sunset, deepened for dark */
+    --accent: 348 30% 28%;
+    --accent-foreground: 348 45% 90%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 28 30% 74%;
-    --input: 28 30% 74%;
-    --ring: 16 82% 51%;
+    --border: 28 16% 24%;
+    --input: 28 16% 24%;
+    --ring: 16 85% 55%;
 
     /* Sunset & landscape tones for gradients and illustration */
     --sunset-gold: 42 92% 58%;
@@ -56,17 +56,83 @@
   * { @apply border-border; }
   body {
     @apply bg-background text-foreground;
-    /* Golden-hour sky: gold rising at the horizon corners, rose overhead */
+    /* The logo's sun lights the room: a warm bloom spills from the top-left
+       (where the logo sits) and fades into dusk; a faint dusk haze rises at
+       the foot of the page. */
     background:
-      radial-gradient(1400px 700px at 15% -10%, hsl(var(--sunset-gold) / 0.20), transparent 45%),
-      radial-gradient(1200px 600px at 100% 0%, hsl(var(--sunset-rose) / 0.18), transparent 42%),
-      radial-gradient(1600px 800px at 50% 115%, hsl(var(--hill-far) / 0.10), transparent 50%),
+      radial-gradient(1100px 750px at 3% -4%, hsl(var(--sunset-gold) / 0.22), transparent 55%),
+      radial-gradient(650px 500px at 6% 1%, hsl(var(--sunset-coral) / 0.16), transparent 50%),
+      radial-gradient(1500px 850px at 50% 122%, hsl(var(--dusk) / 0.28), transparent 55%),
       hsl(var(--background));
     background-attachment: fixed;
   }
 }
 
+@layer components {
+  /* Velvet-touch buttons: soft fabric nap, a top sheen, and a faint lift that
+     sinks on press so the button reads as a physical, 3D object. */
+  .btn-velvet {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.28),        /* top sheen — light on the nap */
+      inset 0 -3px 6px hsl(20 55% 16% / 0.22),     /* soft shaded underside */
+      0 2px 3px hsl(20 50% 25% / 0.16),            /* faint contact shadow */
+      0 6px 16px -5px hsl(20 60% 35% / 0.28);      /* soft ambient lift */
+  }
+  /* Fine fractal-noise grain, blended soft so it reads as brushed velvet. */
+  .btn-velvet::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='120'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 120px 120px;
+    opacity: 0.12;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .btn-velvet:hover {
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.34),
+      inset 0 -3px 7px hsl(20 55% 16% / 0.20),
+      0 3px 5px hsl(20 50% 25% / 0.18),
+      0 10px 22px -5px hsl(20 60% 35% / 0.34);
+    filter: brightness(1.04);
+  }
+  /* Pressed: sink into the surface — translate down + inner shadow, less lift. */
+  .btn-velvet:active {
+    transform: translateY(2px);
+    box-shadow:
+      inset 0 2px 5px hsl(20 55% 14% / 0.40),
+      inset 0 1px 0 hsl(0 0% 100% / 0.10),
+      0 1px 2px hsl(20 50% 25% / 0.22);
+    filter: brightness(0.98);
+  }
+}
+
 @layer utilities {
+  /* Light source: a warm radial halo behind the logo so it appears to emit
+     the glow that washes the top-left of the page. */
+  .logo-glow {
+    position: relative;
+    isolation: isolate;
+  }
+  .logo-glow::before {
+    content: "";
+    position: absolute;
+    left: -30%;
+    top: 50%;
+    width: 180%;
+    height: 320%;
+    transform: translateY(-50%);
+    background: radial-gradient(closest-side, hsl(var(--sunset-gold) / 0.45), hsl(var(--sunset-coral) / 0.18) 55%, transparent 78%);
+    filter: blur(6px);
+    pointer-events: none;
+    z-index: -1;
+  }
   /* Soft warm glow behind featured cards */
   .glow-card {
     box-shadow:

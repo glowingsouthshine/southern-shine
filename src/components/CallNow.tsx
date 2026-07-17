@@ -7,7 +7,7 @@ export default function CallNow() {
     <a
       href="tel:+18652654105"
       onClick={() => trackEvent('click_call', { location: 'floating' })}
-      className="fixed bottom-4 right-4 z-50 md:hidden inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[hsl(10_75%_45%)] px-4 py-3 text-white shadow-btn-lg transition-all duration-150 hover:brightness-105 active:translate-y-[2px] active:shadow-btn-sm"
+      className="btn-velvet fixed bottom-4 right-4 z-50 md:hidden inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[hsl(10_75%_45%)] px-4 py-3 text-white transition-all duration-150"
       aria-label="Call now"
     >
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
