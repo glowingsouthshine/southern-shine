@@ -4,6 +4,7 @@ import Analytics from '@/components/Analytics'
 import CallNow from '@/components/CallNow'
 
 export const metadata: Metadata = {
+  colorScheme: 'dark',
   title: 'A Southern Glow | House & Office Cleaning',
   description: 'Trusted house & office cleaning in Oak Ridge, Knoxville, Sevierville and surrounding areas. Call 865-265-4105. Mon–Sat 9–5.',
   openGraph: {
