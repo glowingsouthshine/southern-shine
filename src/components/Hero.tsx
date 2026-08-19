@@ -79,11 +79,21 @@ function RollingHills() {
 
 export default function Hero() {
   return (
-    <section className="relative w-full overflow-hidden">
+    <section className="relative isolate w-full overflow-hidden">
       {/* Sunset sky wash behind everything */}
       <div
         aria-hidden
         className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,hsl(var(--sunset-gold)/0.22)_0%,hsl(var(--sunset-rose)/0.14)_45%,transparent_85%)]"
+      />
+      {/* Faint gold grid texture — same technique as the tribeclaw.com reference */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          backgroundImage:
+            "linear-gradient(hsl(var(--sunset-gold) / 0.08) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--sunset-gold) / 0.08) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
       />
       <RollingHills />
       <Sparkles />
