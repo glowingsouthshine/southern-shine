@@ -48,7 +48,7 @@ export default function ServicePage({ params }: any) {
         <h2>Get an instant estimate</h2>
         <p>Use the estimator on the home page to pick add-ons and see your price before booking.</p>
       </div>
-      <a href="/#quote" className="mt-8 inline-flex items-center rounded-md bg-primary px-4 py-2 text-white">Request a Quote</a>
+      <a href="/#services" className="mt-8 inline-flex items-center rounded-md bg-primary px-4 py-2 text-white">Request a Quote</a>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </div>
   );

@@ -18,7 +18,7 @@ export default function Footer() {
           <Link href="/pay" className="text-foreground/80 hover:text-primary">Pay Invoice</Link>
           <Link href="/#reviews" className="text-foreground/80 hover:text-primary">Reviews</Link>
           <Link href="/#contact" className="text-foreground/80 hover:text-primary">Contact</Link>
-          <Link href="/#quote" onClick={() => trackEvent('click_get_quote', { location: 'footer' })} className="inline-flex items-center rounded-md border border-primary/35 bg-card/70 px-3 py-1.5 shadow-btn transition-all duration-150 hover:-translate-y-px hover:bg-accent/60 hover:shadow-btn-lg active:translate-y-[2px] active:shadow-btn-sm">Get a Quote</Link>
+          <Link href="/#services" onClick={() => trackEvent('click_get_quote', { location: 'footer' })} className="inline-flex items-center rounded-md border border-primary/35 bg-card/70 px-3 py-1.5 shadow-btn transition-all duration-150 hover:-translate-y-px hover:bg-accent/60 hover:shadow-btn-lg active:translate-y-[2px] active:shadow-btn-sm">Get a Quote</Link>
         </nav>
       </div>
     </footer>

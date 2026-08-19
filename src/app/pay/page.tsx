@@ -38,12 +38,9 @@ export default function PayPage() {
       <main className="flex-1 py-16 sm:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
           <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sunset-gradient">
-              Cha-ching, the friendly kind
-            </p>
-            <h1 className="mt-2 font-headline text-4xl sm:text-5xl font-bold">Pay Your Invoice</h1>
+            <h1 className="font-headline text-4xl sm:text-5xl font-bold">Pay Your Invoice</h1>
             <p className="mt-4 text-lg text-foreground/80">
-              You pay after the work is done and you're happy with it — never before.
+              Pay however's easiest for you — card, cash, check, or a text-to-pay link once the work is done.
             </p>
           </div>
 

@@ -5,7 +5,6 @@ import Reviews from "@/components/Reviews";
 import SpecialOffer from "@/components/SpecialOffer";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
-import RequestQuoteForm from "@/components/RequestQuoteForm";
 import SEO from "@/components/SEO";
 import FAQ from "@/components/FAQ";
 import Promises from "@/components/Promises";
@@ -21,18 +20,6 @@ export default function Home() {
       <SEO />
         <Hero />
         <Services />
-        <section id="quote" className="py-16 sm:py-24 bg-secondary/20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <Card className="shadow-lg border-primary/30">
-              <CardHeader>
-                <CardTitle>Request a Quote</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <RequestQuoteForm />
-              </CardContent>
-            </Card>
-          </div>
-        </section>
         <SpecialOffer />
         <Promises />
         <Gallery />

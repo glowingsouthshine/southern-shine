@@ -22,7 +22,7 @@ export function LocalBusinessJsonLd() {
     ],
     potentialAction: {
       '@type': 'ReserveAction',
-      target: (process.env.NEXT_PUBLIC_SITE_URL || '') + '/#quote',
+      target: (process.env.NEXT_PUBLIC_SITE_URL || '') + '/#services',
       result: { '@type': 'Reservation', name: 'Cleaning Service Booking' },
     },
   };

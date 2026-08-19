@@ -42,7 +42,7 @@ export default function Header() {
               </li>
             ))}
             <li>
-              <Link href="/#quote" onClick={() => trackEvent('click_get_quote', { location: 'header' })} className="btn-velvet inline-flex items-center rounded-xl border border-primary/35 bg-card/70 px-3 py-2 transition-all duration-150 hover:bg-accent/60">Get a Quote</Link>
+              <Link href="/#services" onClick={() => trackEvent('click_get_quote', { location: 'header' })} className="btn-velvet inline-flex items-center rounded-xl border border-primary/35 bg-card/70 px-3 py-2 transition-all duration-150 hover:bg-accent/60">Get a Quote</Link>
             </li>
             <li>
               <a href="tel:+18652654105" onClick={() => trackEvent('click_call', { location: 'header' })} className="btn-velvet inline-flex items-center rounded-xl bg-gradient-to-b from-primary to-[hsl(10_75%_45%)] px-3 py-2 text-white transition-all duration-150">

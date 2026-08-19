@@ -52,7 +52,7 @@ export default function SpecialOffer() {
         </p>
         <div className="mt-6 flex justify-center gap-3">
           <Button asChild>
-            <Link href="#quote" onClick={() => trackEvent("select_promotion", { promotion_name: special.name })}>
+            <Link href="#services" onClick={() => trackEvent("select_promotion", { promotion_name: special.name })}>
               Claim Offer
             </Link>
           </Button>

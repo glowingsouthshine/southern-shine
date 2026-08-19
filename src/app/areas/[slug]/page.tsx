@@ -48,7 +48,7 @@ export default function AreaPage({ params }: any) {
         <li>Friendly, respectful professionals</li>
         <li>Flexible scheduling to fit your life</li>
       </ul>
-      <a href="/#quote" className="mt-8 inline-flex items-center rounded-md bg-primary px-4 py-2 text-white">Get a Free Estimate</a>
+      <a href="/#services" className="mt-8 inline-flex items-center rounded-md bg-primary px-4 py-2 text-white">Get a Free Estimate</a>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </div>
   );
