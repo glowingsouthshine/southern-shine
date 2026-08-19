@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { UserCheck, HeartHandshake, MapPin } from "lucide-react";
 
 const trustBadges = [
-  { icon: UserCheck, label: "Pay After You're Happy" },
+  { icon: UserCheck, label: "Free, No-Obligation Estimates" },
   { icon: HeartHandshake, label: "100% Happiness Guarantee" },
   { icon: MapPin, label: "Locally Owned — East TN" },
 ];
@@ -51,7 +51,7 @@ export default function Hero() {
             </h1>
             <p className="mt-6 text-base sm:text-lg text-foreground/80">
               Careful, reliable cleaning for homes and offices around East Tennessee &mdash; fair
-              prices, and no payment until you&rsquo;re happy.
+              prices and friendly service, no gimmicks.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg">

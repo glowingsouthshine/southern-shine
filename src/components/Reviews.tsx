@@ -27,8 +27,8 @@ const commitments = [
   },
   {
     icon: WalletCards,
-    title: "You Pay After, Never Before",
-    body: "Not a dime upfront. You look the place over, and you pay once you're happy with it.",
+    title: "Simple, Flexible Payment",
+    body: "Card, cash, check, or a text-to-pay link — whatever's easiest for you after each visit.",
   },
   {
     icon: MapPin,
