@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Logo from "@/components/Logo";
 import { UserCheck, HeartHandshake, MapPin } from "lucide-react";
 
 const trustBadges = [
@@ -68,14 +68,7 @@ export default function Hero() {
               aria-hidden
               className="pointer-events-none absolute -inset-x-[45%] -inset-y-[35%] -z-10 bg-[radial-gradient(closest-side,hsl(var(--sunset-gold)/0.32),hsl(var(--sunset-coral)/0.15)_45%,transparent_72%)] blur-2xl"
             />
-            <Image
-              src="/images/logo.png"
-              alt="A Southern Glow — a house glowing warmly against the dusk"
-              width={720}
-              height={720}
-              priority
-              className="relative w-full max-w-md drop-shadow-[0_0_70px_hsl(var(--sunset-gold)/0.35)]"
-            />
+            <Logo className="relative w-full max-w-md drop-shadow-[0_0_70px_hsl(var(--sunset-gold)/0.35)]" />
           </div>
         </div>
 
