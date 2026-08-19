@@ -15,11 +15,6 @@ export default function Logo({ className }: LogoProps) {
       aria-label="A Southern Glow — a house glowing warmly against the dusk"
     >
       <defs>
-        <radialGradient id="logo-ambient" cx="50%" cy="46%" r="55%">
-          <stop offset="0%" stopColor="hsl(var(--sunset-gold))" stopOpacity="0.55" />
-          <stop offset="55%" stopColor="hsl(var(--sunset-coral))" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="hsl(var(--sunset-coral))" stopOpacity="0" />
-        </radialGradient>
         <linearGradient id="logo-ray" x1="0%" y1="100%" x2="0%" y2="0%">
           <stop offset="0%" stopColor="hsl(var(--sunset-gold))" stopOpacity="0.95" />
           <stop offset="100%" stopColor="hsl(var(--sunset-coral))" stopOpacity="0" />
@@ -29,9 +24,6 @@ export default function Logo({ className }: LogoProps) {
           <stop offset="100%" stopColor="hsl(var(--sunset-rose))" stopOpacity="0" />
         </linearGradient>
       </defs>
-
-      {/* Ambient glow — the house as the page's light source */}
-      <circle cx="110" cy="102" r="108" fill="url(#logo-ambient)" />
 
       {/* Sunburst rays, radiating from behind the house */}
       <g stroke="url(#logo-ray)" strokeWidth="2.5" strokeLinecap="round">
