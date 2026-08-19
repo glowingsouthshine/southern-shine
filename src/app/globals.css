@@ -68,6 +68,11 @@
   }
 }
 
+@keyframes gold-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
 @layer components {
   /* Velvet-touch buttons: soft fabric nap, a top sheen, and a faint lift that
      sinks on press so the button reads as a physical, 3D object. */

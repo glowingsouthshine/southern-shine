@@ -9,6 +9,47 @@ const trustBadges = [
   { icon: MapPin, label: "Locally Owned — East TN" },
 ];
 
+const sparkles = [
+  { size: 8, top: "5rem", left: "5%", delay: "0s" },
+  { size: 6, top: "8rem", left: "15%", delay: "0.3s" },
+  { size: 5, bottom: "8rem", left: "10%", delay: "1.8s" },
+  { size: 7, bottom: "5rem", left: "18%", delay: "1.2s" },
+  { size: 10, top: "5rem", right: "5%", delay: "0.2s" },
+  { size: 8, top: "10rem", right: "10%", delay: "0.6s" },
+  { size: 12, top: "16rem", right: "12%", delay: "2.2s" },
+  { size: 7, bottom: "10rem", right: "15%", delay: "2.5s" },
+  { size: 6, bottom: "13rem", right: "30%", delay: "1.5s" },
+  { size: 5, top: "50%", right: "4%", delay: "2.8s" },
+];
+
+/* A scattered field of small twinkling sparkles around the hero */
+function Sparkles() {
+  return (
+    <>
+      {sparkles.map((s, i) => (
+        <svg
+          key={i}
+          aria-hidden
+          width={s.size}
+          height={s.size}
+          viewBox="0 0 12 12"
+          fill="none"
+          className="pointer-events-none absolute text-primary"
+          style={{
+            top: s.top,
+            bottom: s.bottom,
+            left: s.left,
+            right: s.right,
+            animation: `gold-glow 3s ease-in-out ${s.delay} infinite`,
+          }}
+        >
+          <path d="M6 0L7.2 4.8L12 6L7.2 7.2L6 12L4.8 7.2L0 6L4.8 4.8L6 0Z" fill="currentColor" />
+        </svg>
+      ))}
+    </>
+  );
+}
+
 /* Layered rolling-hill silhouettes fading into the valley haze */
 function RollingHills() {
   return (
@@ -40,6 +81,7 @@ export default function Hero() {
         className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,hsl(var(--sunset-gold)/0.22)_0%,hsl(var(--sunset-rose)/0.14)_45%,transparent_85%)]"
       />
       <RollingHills />
+      <Sparkles />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
